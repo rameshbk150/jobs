@@ -10,7 +10,7 @@ export default function ApplicationsPage() {
     const loadApplications = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5001/api/applications",
+          "https://jobs-one-blond.vercel.app/api/applications",
           {
             cache: "no-store",
           }

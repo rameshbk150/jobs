@@ -83,7 +83,7 @@ export default function ProfilePage() {
         =================================== */
 
         const response = await fetch(
-          `http://localhost:5001/api/profile/${parsedUser.id}`,
+          `https://jobs-one-blond.vercel.app/api/profile/${parsedUser.id}`,
           {
             cache: "no-store",
           }

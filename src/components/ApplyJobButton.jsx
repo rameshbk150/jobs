@@ -51,7 +51,7 @@ export default function ApplyJobButton({ job }) {
 
       try {
         const response = await fetch(
-          `http://localhost:5001/api/applications/check/${user.id}/${job.id}`,
+          `https://jobs-one-blond.vercel.app/api/applications/check/${user.id}/${job.id}`,
           {
             cache: "no-store",
           }
@@ -89,7 +89,7 @@ export default function ApplyJobButton({ job }) {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:5001/api/applications",
+        "https://jobs-one-blond.vercel.app/api/applications",
         {
           method: "POST",
           headers: {

@@ -177,7 +177,7 @@ export default function EditProfilePage() {
 
         const response =
           await fetch(
-            `http://localhost:5001/api/profile/${parsedUser.id}`,
+            `https://jobs-one-blond.vercel.app/api/profile/${parsedUser.id}`,
             {
               method: "GET",
               cache: "no-store",
@@ -543,8 +543,8 @@ export default function EditProfilePage() {
 
       const url =
         profileExists
-          ? `http://localhost:5001/api/profile/${loggedUser.id}`
-          : "http://localhost:5001/api/profile";
+          ? `https://jobs-one-blond.vercel.app/api/profile/${loggedUser.id}`
+          : "https://jobs-one-blond.vercel.app/api/profile";
 
       const method =
         profileExists
