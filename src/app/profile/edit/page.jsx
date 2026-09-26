@@ -177,7 +177,7 @@ export default function EditProfilePage() {
 
         const response =
           await fetch(
-            `https://jobs-one-blond.vercel.app/api/profile/${parsedUser.id}`,
+            `https://jobsearchbackend-omnd.onrender.com/api/profile/${parsedUser.id}`,
             {
               method: "GET",
               cache: "no-store",
@@ -543,8 +543,8 @@ export default function EditProfilePage() {
 
       const url =
         profileExists
-          ? `https://jobs-one-blond.vercel.app/api/profile/${loggedUser.id}`
-          : "https://jobs-one-blond.vercel.app/api/profile";
+          ? `https://jobsearchbackend-omnd.onrender.com/api/profile/${loggedUser.id}`
+          : "https://jobsearchbackend-omnd.onrender.com/api/profile";
 
       const method =
         profileExists

@@ -83,7 +83,7 @@ export default function ProfilePage() {
         =================================== */
 
         const response = await fetch(
-          `https://jobs-one-blond.vercel.app/api/profile/${parsedUser.id}`,
+          `https://jobsearchbackend-omnd.onrender.com/api/profile/${parsedUser.id}`,
           {
             cache: "no-store",
           }
