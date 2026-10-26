@@ -10,7 +10,7 @@ export default function ApplicationsPage() {
     const loadApplications = async () => {
       try {
         const response = await fetch(
-          "https://jobsearchbackend-omnd.onrender.com/api/applications",
+          "http://localhost:5001/api/applications",
           {
             cache: "no-store",
           }

@@ -51,7 +51,7 @@ export default function ApplyJobButton({ job }) {
 
       try {
         const response = await fetch(
-          `https://jobsearchbackend-omnd.onrender.com/api/applications/check/${user.id}/${job.id}`,
+          `http://localhost:5001/api/applications/check/${user.id}/${job.id}`,
           {
             cache: "no-store",
           }
@@ -89,7 +89,7 @@ export default function ApplyJobButton({ job }) {
       setLoading(true);
 
       const response = await fetch(
-        "https://jobsearchbackend-omnd.onrender.com/api/applications",
+        "http://localhost:5001/api/applications",
         {
           method: "POST",
           headers: {

@@ -83,7 +83,7 @@ export default function ProfilePage() {
         =================================== */
 
         const response = await fetch(
-          `https://jobsearchbackend-omnd.onrender.com/api/profile/${parsedUser.id}`,
+          `http://localhost:5001/api/profile/${parsedUser.id}`,
           {
             cache: "no-store",
           }
