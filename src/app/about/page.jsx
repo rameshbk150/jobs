@@ -446,76 +446,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* WHY CHOOSE */}
-      <section className="py-20 sm:py-24">
-        <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
-              {whyChoose.label}
-            </p>
-
-            <h2 className="mt-4 text-3xl font-bold text-slate-950 sm:text-4xl">
-              {whyChoose.title}
-            </h2>
-
-            <p className="mt-5 leading-8 text-slate-600">
-              {whyChoose.description}
-            </p>
-
-            <Link
-              href={whyChoose.button.href}
-              className="mt-7 inline-flex items-center gap-2 font-semibold text-blue-600 transition hover:text-blue-700"
-            >
-              {whyChoose.button.label}
-              <ArrowRight size={18} />
-            </Link>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            {whyChoose.points.map((point) => (
-              <div
-                key={point}
-                className="flex items-start gap-3 rounded-2xl border border-slate-200 p-5"
-              >
-                <CheckCircle2
-                  size={21}
-                  className="mt-0.5 shrink-0 text-emerald-500"
-                />
-
-                <p className="text-sm font-medium leading-6 text-slate-700">
-                  {point}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="px-4 pb-20 sm:px-6 sm:pb-24 lg:px-8">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-[32px] bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-12 text-center sm:px-10 sm:py-16">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-100">
-            Start Your Career Journey
-          </p>
-
-          <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Find the Right Opportunity With RB Group
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-xl leading-7 text-blue-100">
-            Explore available jobs and take the next step toward your career
-            goals.
-          </p>
-
-          <Link
-            href="/jobs"
-            className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-white px-7 text-sm font-bold text-blue-700 transition hover:bg-blue-50"
-          >
-            View Available Jobs
-            <ArrowRight size={18} />
-          </Link>
-        </div>
-      </section>
+ 
     </main>
   );
 }

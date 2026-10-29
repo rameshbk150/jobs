@@ -2,13 +2,11 @@ import ContactPage from "@/components/ContactPage";
 import { contactData } from "@/data/contactData";
 
 export const metadata = {
-  title: "Contact Ramesh BK",
+  title: "Contact Us | JobSearch By Ramesh",
   description:
-    "Contact Ramesh BK for professional enquiries, career opportunities, and business communication.",
+    "Contact JobSearch for recruitment, career opportunities, and professional enquiries.",
 };
 
 export default function Page() {
-  return (
-    <ContactPage data={contactData} />
-  );
+  return <ContactPage data={contactData} />;
 }

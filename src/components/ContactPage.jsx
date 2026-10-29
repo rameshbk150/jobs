@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 
 import {
@@ -7,33 +8,39 @@ import {
   UserRound,
   ArrowRight,
   BriefcaseBusiness,
+  ExternalLink,
 } from "lucide-react";
 
 export default function ContactPage({ data }) {
-  const {
-    profile,
-    hero,
-    enquiry,
-    form,
-    cta,
-  } = data;
+  const { profile, hero, enquiry, form, cta, map } = data;
+
+  const mapAddress = map?.address || profile.address || "";
+  const mapQuery = encodeURIComponent(mapAddress);
+
+  const mapEmbedUrl =
+    map?.embedUrl ||
+    `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+
+  const mapDirectionsUrl =
+    map?.directionsUrl ||
+    `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
   return (
-    <main className="min-h-screen bg-slate-50">
+    <main className="min-h-screen bg-slate-50 text-slate-800">
 
       {/* ================================= */}
-      {/* HERO */}
+      {/* HERO SECTION */}
       {/* ================================= */}
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 px-4 py-20 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 px-4 py-20 text-white sm:py-24">
 
-        <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+        <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
 
-        <div className="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-cyan-300/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-cyan-300/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-6xl text-center">
 
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-white/15 backdrop-blur">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-white/20 bg-white/15 backdrop-blur">
             <Mail size={30} />
           </div>
 
@@ -50,18 +57,16 @@ export default function ContactPage({ data }) {
       </section>
 
       {/* ================================= */}
-      {/* MAIN CONTENT */}
+      {/* CONTACT DETAILS & FORM */}
       {/* ================================= */}
 
       <section className="px-4 py-16 sm:px-6 lg:px-8">
 
-        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="mx-auto grid max-w-6xl items-start gap-8 lg:grid-cols-[0.9fr_1.1fr]">
 
-          {/* ================================= */}
-          {/* PROFILE DETAILS */}
-          {/* ================================= */}
+          {/* CONTACT PROFILE */}
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm sm:p-8">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
 
             <div className="flex items-center gap-4">
 
@@ -69,13 +74,13 @@ export default function ContactPage({ data }) {
                 <UserRound size={30} />
               </div>
 
-              <div>
+              <div className="min-w-0">
 
-                <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
+                <p className="text-xs font-bold uppercase tracking-widest text-blue-600">
                   Contact Profile
                 </p>
 
-                <h2 className="mt-1 text-2xl font-bold text-slate-900">
+                <h2 className="mt-1 break-words text-2xl font-bold text-slate-900">
                   {profile.name}
                 </h2>
 
@@ -91,25 +96,31 @@ export default function ContactPage({ data }) {
 
             <div className="space-y-4">
 
-              <ContactItem
-                icon={<Mail size={21} />}
-                title="Email Address"
-                value={profile.email}
-                href={`mailto:${profile.email}`}
-              />
+              {profile.email && (
+                <ContactItem
+                  icon={<Mail size={21} />}
+                  title="Email Address"
+                  value={profile.email}
+                  href={`mailto:${profile.email}`}
+                />
+              )}
 
-              <ContactItem
-                icon={<Phone size={21} />}
-                title="Phone Number"
-                value={profile.phone}
-                href={`tel:${profile.phone.replace(/\s/g, "")}`}
-              />
+              {profile.phone && (
+                <ContactItem
+                  icon={<Phone size={21} />}
+                  title="Phone Number"
+                  value={profile.phone}
+                  href={`tel:${profile.phone.replace(/[^\d+]/g, "")}`}
+                />
+              )}
 
-              <ContactItem
-                icon={<MapPin size={21} />}
-                title="Location"
-                value={profile.address}
-              />
+              {profile.address && (
+                <ContactItem
+                  icon={<MapPin size={21} />}
+                  title="Location"
+                  value={profile.address}
+                />
+              )}
 
             </div>
 
@@ -130,7 +141,7 @@ export default function ContactPage({ data }) {
                     {enquiry.title}
                   </h3>
 
-                  <p className="mt-1 text-sm leading-6 text-slate-600">
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
                     {enquiry.description}
                   </p>
 
@@ -146,11 +157,11 @@ export default function ContactPage({ data }) {
           {/* CONTACT FORM */}
           {/* ================================= */}
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm sm:p-8">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
 
             <div className="mb-7">
 
-              <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
+              <p className="text-xs font-bold uppercase tracking-widest text-blue-600">
                 {form.label}
               </p>
 
@@ -164,42 +175,33 @@ export default function ContactPage({ data }) {
 
             </div>
 
-            <form className="space-y-5">
+            {/* Connect this form to your backend API to send enquiries. */}
 
-              {/* NAME */}
+            <form className="space-y-5">
 
               <FormInput
                 id="name"
                 type="text"
                 label={form.fields.name.label}
-                placeholder={
-                  form.fields.name.placeholder
-                }
+                placeholder={form.fields.name.placeholder}
+                required
               />
-
-              {/* EMAIL */}
 
               <FormInput
                 id="email"
                 type="email"
                 label={form.fields.email.label}
-                placeholder={
-                  form.fields.email.placeholder
-                }
+                placeholder={form.fields.email.placeholder}
+                required
               />
-
-              {/* SUBJECT */}
 
               <FormInput
                 id="subject"
                 type="text"
                 label={form.fields.subject.label}
-                placeholder={
-                  form.fields.subject.placeholder
-                }
+                placeholder={form.fields.subject.placeholder}
+                required
               />
-
-              {/* MESSAGE */}
 
               <div>
 
@@ -214,22 +216,18 @@ export default function ContactPage({ data }) {
                   id="message"
                   name="message"
                   rows={6}
-                  placeholder={
-                    form.fields.message.placeholder
-                  }
-                  className="w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                  required
+                  placeholder={form.fields.message.placeholder}
+                  className="w-full resize-y rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
                 />
 
               </div>
-
-              {/* BUTTON */}
 
               <button
                 type="submit"
                 className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 font-semibold text-white shadow-md shadow-blue-600/20 transition hover:bg-blue-700 hover:shadow-lg"
               >
                 {form.buttonText}
-
                 <ArrowRight size={18} />
               </button>
 
@@ -249,45 +247,109 @@ export default function ContactPage({ data }) {
       {/* BOTTOM CTA */}
       {/* ================================= */}
 
-      <section className="px-4 pb-16 sm:px-6 lg:px-8">
 
-        <div className="mx-auto max-w-6xl rounded-3xl bg-slate-900 px-6 py-9 text-center text-white sm:px-10">
+      {/* ================================= */}
+      {/* GOOGLE MAP - LAST SECTION */}
+      {/* ================================= */}
 
-          <h2 className="text-2xl font-bold sm:text-3xl">
-            {cta.title}
-          </h2>
+      {mapAddress && (
+        <section className="bg-white px-4 py-16 sm:px-6 lg:px-8">
 
-          <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-300">
-            {cta.description}
-          </p>
+          <div className="mx-auto max-w-6xl">
 
-          <Link
-            href={cta.buttonLink}
-            className="mt-6 inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 text-sm font-bold text-slate-900 transition hover:bg-blue-50"
-          >
-            {cta.buttonText}
+            {/* MAP HEADING */}
 
-            <ArrowRight size={17} />
-          </Link>
+            <div className="mb-10 text-center">
 
-        </div>
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600">
+                <MapPin size={16} />
+                {map?.label || "Our Location"}
+              </div>
 
-      </section>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                {map?.title || "Find Us on Google Maps"}
+              </h2>
+
+              <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-500 sm:text-base">
+                {map?.description ||
+                  "Locate us easily and get directions."}
+              </p>
+
+            </div>
+
+            {/* GOOGLE MAP CARD */}
+
+            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-200/50">
+
+              <div className="relative h-[340px] w-full bg-slate-100 sm:h-[430px] lg:h-[480px]">
+
+                <iframe
+                  title={`Google Maps location of ${map?.locationName || profile.name}`}
+                  src={mapEmbedUrl}
+                  width="100%"
+                  height="100%"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                  style={{ border: 0 }}
+                  className="absolute inset-0 h-full w-full"
+                />
+
+              </div>
+
+              {/* ADDRESS & DIRECTIONS */}
+
+              <div className="flex flex-col gap-5 border-t border-slate-100 bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+
+                <div className="flex items-start gap-4">
+
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+                    <MapPin size={23} />
+                  </div>
+
+                  <div className="min-w-0">
+
+                    <h3 className="text-lg font-bold text-slate-900">
+                      {map?.locationName || profile.name}
+                    </h3>
+
+                    <p className="mt-1 max-w-lg text-sm leading-6 text-slate-500">
+                      {mapAddress}
+                    </p>
+
+                  </div>
+
+                </div>
+
+                <a
+                  href={mapDirectionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 text-sm font-bold text-white shadow-md shadow-blue-600/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg"
+                >
+                  <MapPin size={17} />
+                  {map?.buttonText || "Get Directions"}
+                  <ExternalLink size={15} />
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+      )}
 
     </main>
   );
 }
 
 /* ================================= */
-/* CONTACT ITEM */
+/* CONTACT ITEM COMPONENT */
 /* ================================= */
 
-function ContactItem({
-  icon,
-  title,
-  value,
-  href,
-}) {
+function ContactItem({ icon, title, value, href }) {
   const content = (
     <div className="group flex items-center gap-4 rounded-2xl border border-slate-100 bg-slate-50 p-4 transition hover:border-blue-100 hover:bg-blue-50/60">
 
@@ -312,10 +374,7 @@ function ContactItem({
 
   if (href) {
     return (
-      <Link
-        href={href}
-        className="block"
-      >
+      <Link href={href} className="block">
         {content}
       </Link>
     );
@@ -325,7 +384,7 @@ function ContactItem({
 }
 
 /* ================================= */
-/* FORM INPUT */
+/* FORM INPUT COMPONENT */
 /* ================================= */
 
 function FormInput({
@@ -333,6 +392,7 @@ function FormInput({
   type,
   label,
   placeholder,
+  required = false,
 }) {
   return (
     <div>
@@ -348,6 +408,7 @@ function FormInput({
         id={id}
         name={id}
         type={type}
+        required={required}
         placeholder={placeholder}
         className="h-12 w-full rounded-xl border border-slate-300 bg-white px-4 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
       />

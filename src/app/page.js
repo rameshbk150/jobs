@@ -5,6 +5,9 @@ import { companiesData } from "@/data/Companies";
 import JobCard from "@/components/JobCard";
 import CompanyCard from "@/components/CompanyCard";
 import Link from "next/link";
+import ContactPage from "@/components/ContactPage";
+import AboutPage from "@/app/about/page";
+import { contactData } from "@/data/contactData";
 
 const stats = [
   { label: "Active Jobs", value: "5,000+" },
@@ -51,7 +54,8 @@ export default async function Home() {
   const jobs = await getJobs();
 
   return (
-    <main className="bg-slate-50 text-slate-800">
+    <>
+      <main className="bg-slate-50 text-slate-800">
       {/* Hero Section */}
       <HeroSection />
 
@@ -149,6 +153,10 @@ export default async function Home() {
           </div>
         </div>
       </section>
-    </main>
+
+      </main>
+      <AboutPage />
+      <ContactPage data={contactData} />
+    </>
   );
 }
