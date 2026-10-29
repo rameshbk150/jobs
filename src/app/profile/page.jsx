@@ -25,6 +25,8 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function ProfilePage() {
   const [loggedUser, setLoggedUser] =
     useState(null);
@@ -83,7 +85,7 @@ export default function ProfilePage() {
         =================================== */
 
         const response = await fetch(
-          `http://localhost:5001/api/profile/${parsedUser.id}`,
+          `${API_URL}/api/profile/${parsedUser.id}`,
           {
             cache: "no-store",
           }

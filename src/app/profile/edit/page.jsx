@@ -32,6 +32,8 @@ import {
   LogIn,
 } from "lucide-react";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 /* =========================================
    EMPTY PROFILE
 ========================================= */
@@ -177,7 +179,7 @@ export default function EditProfilePage() {
 
         const response =
           await fetch(
-            `http://localhost:5001/api/profile/${parsedUser.id}`,
+            `${API_URL}/api/profile/${parsedUser.id}`,
             {
               method: "GET",
               cache: "no-store",
@@ -543,8 +545,8 @@ export default function EditProfilePage() {
 
       const url =
         profileExists
-          ? `http://localhost:5001/api/profile/${loggedUser.id}`
-          : "http://localhost:5001/api/profile";
+          ? `${API_URL}/api/profile/${loggedUser.id}`
+          : `${API_URL}/api/profile`;
 
       const method =
         profileExists

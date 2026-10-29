@@ -1,5 +1,5 @@
 export const siteData = {
-  logo: "/logo/logo.png",
+  logo: "/logo/rameshlogo.png",
 
   navLinks: [
     { name:"Home",href:"/"},

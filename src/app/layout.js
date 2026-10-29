@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import { siteData } from "@/data/DataSite";
 
 import "./globals.css";
+import "../styles/header.css";
 import Footer from "@/components/FooterSection";
 
 

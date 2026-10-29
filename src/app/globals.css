@@ -66,6 +66,7 @@ body {
   align-items: center;
 
   height: 100%;
+  width: 250px;
 
   flex-shrink: 0;
 
@@ -74,8 +75,8 @@ body {
 
 .header-logo-image {
   width: auto;
-  height: 70px;
-  max-width: 230px;
+  height: 78px;
+  max-width: 250px;
 
   object-fit: contain;
 }
@@ -1218,6 +1219,10 @@ body {
     height: 62px;
     max-width: 205px;
   }
+
+  .header-logo {
+    width: 205px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -1233,6 +1238,10 @@ body {
     max-width: 170px;
   }
 
+  .header-logo {
+    width: 170px;
+  }
+
   .mobile-header-container {
     padding: 13px;
   }
@@ -1245,4 +1254,3 @@ body {
     width: 275px;
   }
 }
-
